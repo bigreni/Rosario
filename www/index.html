@@ -23,11 +23,11 @@
 <script type="text/javascript" src="js/json2-min.js"></script>
 <script type="text/javascript" src="js/utility.js"></script>
 <script type="text/javascript" src="js/persist.js"></script>
-
+<script type="text/javascript" src="js/favorites.js"></script>
 
 	 <div class="cabeza">
         <h2>Cuando Llega Mi Rosario Bus</h2>
-              <!--<a id="link-favoritos" href="Favoritos.aspx" >Favoritos</a>-->
+         <a id="link-favoritos" href="Favoritos.html" >Favoritos</a>
     </div>
     
     <div class="linea-cabeza">
@@ -96,22 +96,22 @@
 	            valorCalle = "",
 	            valorCruce = "";
 
-	        //var dameFavoActual = function() {
-	        //    return AleFavos.create(
-	        //        "",
-	        //        valorLocal,
-	        //        valorLinea,
-	        //        valorCalle,
-	        //        valorCruce
-	        //    );
-	        //};
+	        var dameFavoActual = function() {
+	            return AleFavos.create(
+	                "",
+	                valorLocal,
+	                valorLinea,
+	                valorCalle,
+	                valorCruce
+	            );
+	        };
 
-	        //var favoritar = function() {
-	        //    AleFavos.add(dameFavoActual());
-	        //    $(".favobtn").fadeOut(function() {
-	        //        $(".favolnk").fadeIn();
-	        //    });
-	        //};
+	        var favoritar = function() {
+	            AleFavos.add(dameFavoActual());
+	            $(".favobtn").fadeOut(function() {
+	                $(".favolnk").fadeIn();
+	            });
+	        };
 
 	        var objCalculo = {
 	            run: function(postParams) {
@@ -125,12 +125,12 @@
                         function(data) {
                             $("#div-calc-result").empty();
                             $("#div-calc-result").append(data);
-                            //var favoActual = dameFavoActual();
-                            //if (AleFavos.exists(favoActual)) {
-                            //    $(".favolnk").show();
-                            //} else {
-                            //    $(".favobtn").show();
-                            //}
+                            var favoActual = dameFavoActual();
+                            if (AleFavos.exists(favoActual)) {
+                                $(".favolnk").show();
+                            } else {
+                                $(".favobtn").show();
+                            }
                         },
                         "html"
                     );
@@ -244,9 +244,9 @@
 	            calcular();
 	        });
 
-	        //$(document).on("click", ".favobtn", function() {
-	        //    favoritar();
-	        //});
+	        $(document).on("click", ".favobtn", function() {
+	            favoritar();
+	        });
 
 	        // trabajo en inicio...
 	        if (store.get("provs") != null) {

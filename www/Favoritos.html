@@ -6,7 +6,8 @@
 <meta name="viewport"
 	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 	<link rel="stylesheet" href="css/index.css" ><title>Bus tracker - Rosario</title>
-
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 </head>
 <body>
 <script type="text/javascript" src="cordova.js"></script>
@@ -29,15 +30,18 @@
     </div>
     
     <div class="linea-cabeza"></div>
- 
-    <div>
-        <br>
-        <a id="link-cuandollega" class="button" href="index.html" >Inicio</a>
-        <br>
-    </div>       
-
-    <div id="favo-container" class="seleccion"></div>
+    <div id="fullpage" data-role="page">
+        <div data-role="content">
     
+            <div>
+                <br>
+                <a id="link-cuandollega" class="button" href="index.html" >Inicio</a>
+                <br>
+            </div>       
+
+            <div id="favo-container" class="seleccion"></div>
+        </div>
+    </div>    
 	<script>
 	    $(document).ready(function() {
 	        var forden = function(f1, f2) {

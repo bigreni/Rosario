@@ -6,7 +6,8 @@
 <meta name="viewport"
 	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 	<link rel="stylesheet" href="css/index.css" ><title>Bus tracker - Rosario</title>
-
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 </head>
 <body onload="onLoad()">
 <script type="text/javascript" src="cordova.js"></script>
@@ -31,48 +32,51 @@
     
     <div class="linea-cabeza">
     </div>
-    <div>
-        <br>
-        <a id="link-favoritos" class="button" href="Favoritos.html" >Favoritos</a>
-        <br>
-    </div>
+    <div id="fullpage" data-role="page">
+        <div data-role="content">
+            <div>
+                <br>
+                <a id="link-favoritos" class="button" href="Favoritos.html" >Favoritos</a>
+                <br>
+            </div>
 
     
-    <div id="div-calc-prov" class="seleccion" >
-        <span>Provincia o grupo:</span>
-        <select id="ddprovs" >
-            <option value="TODAS">TODAS</option>
-            <option value="BSAS">BUENOS AIRES</option>
-            <option value="ROSARIO">ROSARIO Y ALREDEDORES</option>
-            <option value="STAFE">SANTA FE</option>
-        </select>
-    </div>
+            <div id="div-calc-prov" class="seleccion" >
+                <span>Provincia o grupo:</span>
+                <select id="ddprovs" >
+                    <option value="TODAS">TODAS</option>
+                    <option value="BSAS">BUENOS AIRES</option>
+                    <option value="ROSARIO">ROSARIO Y ALREDEDORES</option>
+                    <option value="STAFE">SANTA FE</option>
+                </select>
+            </div>
     
-    <div id="div-calc-locs" class="seleccion" >
-        <span>Localidad</span>
-        <select id="ddlocs" >
-            <option value="...">...</option>
-        </select>
-    </div>
+            <div id="div-calc-locs" class="seleccion" >
+                <span>Localidad</span>
+                <select id="ddlocs" >
+                    <option value="...">...</option>
+                </select>
+            </div>
     
-    <div id="div-calc-lineas" class="seleccion" >
-        <span>Línea</span>
-        <select id="ddlins"></select>
-    </div>
+            <div id="div-calc-lineas" class="seleccion" >
+                <span>Línea</span>
+                <select id="ddlins"></select>
+            </div>
     
-    <div id="div-calc-calles" class="seleccion" >
-        <span>Calle</span>
-        <select id="ddcalles"></select>
-    </div>
+            <div id="div-calc-calles" class="seleccion" >
+                <span>Calle</span>
+                <select id="ddcalles"></select>
+            </div>
     
-    <div id="div-calc-cruces" class="seleccion" >
-        <span>Cruce</span>
-        <select id="ddcruces"></select>
-    </div>
+            <div id="div-calc-cruces" class="seleccion" >
+                <span>Cruce</span>
+                <select id="ddcruces"></select>
+            </div>
     
-    <div id="div-calc-result">
+            <div id="div-calc-result">
+            </div>
+        </div>
     </div>
-    
 	<script>
 	    (function() {
 	        var methods = ["assert", "cd", "clear", "count", "countReset",

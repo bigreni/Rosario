@@ -19,11 +19,12 @@
     function initApp() {
         if (!AdMob) { alert('admob plugin not ready'); return; }
         initAd();
+        loadInterstitial();
         // display the banner at startup
-        if (Math.round(Math.random()) == 1)
-        { loadInterstitial(); }
-        else
-        { createSelectedBanner(); }
+        //if (Math.round(Math.random()) == 1)
+        //{ loadInterstitial(); }
+        //else
+        //{ createSelectedBanner(); }
     }
 
     function initAd() {

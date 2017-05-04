@@ -14,7 +14,12 @@
             //banner: 'ca-app-pub-3886850395157773/3411786244'
             //interstitial: 'ca-app-pub-9249695405712287/3301233156'
         };
-    }
+    } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
+    admobid = {
+      banner: 'ca-app-pub-1683858134373419/8619965489', 
+      interstitial: 'ca-app-pub-9249695405712287/7179328353'
+    };
+  }
 
     function initApp() {
         if (!AdMob) { alert('admob plugin not ready'); return; }
@@ -64,9 +69,9 @@
 
    function checkFirstUse()
     {
-            askRating();
-            initApp();
-            //document.getElementById('screen').style.display = 'none';     
+            //askRating();
+            //initApp();
+            document.getElementById('screen').style.display = 'none';     
     }
 
 function askRating()
@@ -77,6 +82,7 @@ function askRating()
   usesUntilPrompt: 10,
   promptAgainForEachNewVersion: false,
   storeAppURL: {
+                ios: '1232892448',
                 android: 'market://details?id=com.buenosaires.withads'
                }
 };

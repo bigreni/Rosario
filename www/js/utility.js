@@ -44,8 +44,11 @@ var AleUtil = (function($) {
         { nombre: "ARROYO LEYES", grupos: ["TODAS", "STAFE"] },
         { nombre: "ARROYO SECO", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "CAPITÁN BERMÚDEZ", grupos: ["TODAS", "ROSARIO"] },
+        { nombre: "CASILDA", grupos: ["TODAS", "ROSARIO", "STAFE"] },
+        { nombre: "CARCARAÑA", grupos: ["TODAS", "ROSARIO", "STAFE"] },
         { nombre: "EMPALME VILLA CONSTITUCIÓN", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "FIGHIERA", grupos: ["TODAS", "ROSARIO"] },
+        { nombre: "FUNES", grupos: ["TODAS", "ROSARIO" ]},
         { nombre: "FRAY LUIS BELTRÁN", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "GENERAL LAGOS", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "GRANADERO BAIGORRIA", grupos: ["TODAS", "ROSARIO"] },
@@ -53,12 +56,16 @@ var AleUtil = (function($) {
         { nombre: "LA RIBERA", grupos: ["TODAS", "STAFE"] },
         { nombre: "LOS ZAPALLOS", grupos: ["TODAS", "STAFE"] },
         { nombre: "PAVON", grupos: ["TODAS"] },
+        { nombre: "PILAR", grupos: ["TODAS", "BSAS"] },
         { nombre: "PEREZ", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "PUEBLO ESTHER", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "PUERTO GENERAL SAN MARTÍN", grupos: ["TODAS", "ROSARIO"] },
+        { nombre: "PUJATO", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "RICARDONE", grupos: ["TODAS"] },
         { nombre: "RINCON", grupos: ["TODAS"] },
+        { nombre: "ROLDAN", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "ROSARIO", grupos: ["TODAS", "ROSARIO"] },
+        { nombre: "SAN JERONIMO", grupos: ["TODAS", "ROSARIO" ]},
         { nombre: "SAN LORENZO", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "SAN MIGUEL", grupos: ["TODAS", "BSAS"] },
         { nombre: "SAN NICOLÁS DE LOS ARROYOS", grupos: ["TODAS", "ROSARIO", "BSAS"] },
@@ -68,7 +75,8 @@ var AleUtil = (function($) {
         { nombre: "SOLDINI", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "TIMBÚES", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "VILLA CONSTITUCIÓN", grupos: ["TODAS", "ROSARIO"] },
-        { nombre: "VILLA GOBERNADOR GÁLVEZ", grupos: ["TODAS", "ROSARIO"] }
+        { nombre: "VILLA GOBERNADOR GÁLVEZ", grupos: ["TODAS", "ROSARIO"] },
+        { nombre: "ZAVALLA", grupos: ["TODAS", "ROSARIO"] }
     ];
     
     return obj;

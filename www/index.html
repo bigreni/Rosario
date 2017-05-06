@@ -5,8 +5,13 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 <link rel="stylesheet" href="css/index.css" ><title>Bus tracker - Rosario</title>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<!-- Include the jQuery library -->
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<link href="css/select2.min.css" rel="stylesheet" />
+<script src="js/select2.min.js"></script>
+
+<link rel="stylesheet" href="css/jquery.sidr.dark.min.css">
+<script src="js/jquery.sidr.min.js"></script>
     <style>
             /* Hide all the app pages until jQuery Mobile inits to
                avoid the Flash of Unstyled Content */
@@ -29,15 +34,6 @@
 <body>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/admob.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-	<script>
-	    if (typeof jQuery == "undefined") {
-	        var script = document.createElement("script");
-	        script.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js";
-	        document.write(script.outerHTML);
-	    }
-    </script>
-
 <script type="text/javascript" src="js/json2-min.js"></script>
 <script type="text/javascript" src="js/utility.js"></script>
 <script type="text/javascript" src="js/persist.js"></script>
@@ -56,19 +52,23 @@
         </script> 
     <div id="fullpage" data-role="page">
         <div data-role="content">
-	         <div class="cabeza">
-                <h2>Cuando Llega Mi Rosario Bus</h2>
+	         <!--<div class="cabeza">
+                <h3>Cuando Llega Mi Rosario Bus</h3>
             </div>
     
             <div class="linea-cabeza">
-            </div>
+            </div>-->
 
-            <div>
-                <a id="link-favoritos"  class="ui-btn ui-btn-b" href="Favoritos.html" >Favoritos</a>
+                 <h3><a id="simplemenu" href="#sidr" style="font-size: xx-large; background-color: #cac8c8; padding: 5px">&#9776;</a>
+               Cuando Llega Bus</h3>
+            <div id="sidr">
+              <ul>
+                <li><a href="index.html" >Cuando Llega</a></li>
+                <li><a href="Favoritos.html" >Favoritos</a></li>
+              </ul>
             </div>
-
-    
-            <div id="div-calc-prov" class="seleccion" >
+            <br>
+            <div id="div-calc-prov" class="droplist" >
                 <span>Provincia o grupo:</span>
                 <select id="ddprovs" >
                     <option value="TODAS">TODAS</option>
@@ -78,24 +78,24 @@
                 </select>
             </div>
     
-            <div id="div-calc-locs" class="seleccion" >
+            <div id="div-calc-locs" class="droplist" >
                 <span>Localidad</span>
                 <select id="ddlocs" >
                     <option value="...">...</option>
                 </select>
             </div>
     
-            <div id="div-calc-lineas" class="seleccion" >
+            <div id="div-calc-lineas" class="droplist" >
                 <span>Línea</span>
                 <select id="ddlins"></select>
             </div>
     
-            <div id="div-calc-calles" class="seleccion" >
+            <div id="div-calc-calles" class="droplist" >
                 <span>Calle</span>
                 <select id="ddcalles"></select>
             </div>
     
-            <div id="div-calc-cruces" class="seleccion" >
+            <div id="div-calc-cruces" class="droplist" >
                 <span>Cruce</span>
                 <select id="ddcruces"></select>
             </div>
@@ -124,6 +124,7 @@
 
 	    $(document).ready(function() {
 	        var store = new Persist.Store("CuandoLlegaBus");
+            $('#simplemenu').sidr();
 
 	        // variables
 	        var valorProvs = "",
@@ -200,6 +201,7 @@
 	                    }
 	                }
 	            }
+
 	        };
 
 	        var onCambioLocalidades = function() {
@@ -219,6 +221,7 @@
 	                    txtName: "."
 	                });
 	            }
+
 	        };
 
 	        var onCambioLineas = function() {
@@ -239,6 +242,7 @@
 	                    txtName: "."
 	                });
 	            }
+
 	        };
 
 	        var onCambioCalles = function() {
@@ -259,6 +263,7 @@
 	                    txtName: "."
 	                });
 	            }
+
 	        };
 
 	        var onCambioCruces = function() {
@@ -299,6 +304,13 @@
 	        }
 	    });
 	</script>
+    <script>
+        $('#ddprovs').select2();
+        $('#ddlocs').select2();
+	    $("#ddlins").select2();
+	    $("#ddcalles").select2();
+	    $("#ddcruces").select2();
+    </script>
   
 </body>
 </html>

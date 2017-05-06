@@ -69,9 +69,9 @@
 
    function checkFirstUse()
     {
-            askRating();
-            initApp();
-            //document.getElementById('screen').style.display = 'none';     
+            //askRating();
+            //initApp();
+            document.getElementById('screen').style.display = 'none';     
     }
 
 function askRating()

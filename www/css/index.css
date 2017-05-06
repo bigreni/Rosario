@@ -26,6 +26,7 @@ body {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+    background-color: #f7f7b4;
 }
 
 div#fullpage {
@@ -57,7 +58,7 @@ div#fullpage {
 
 a:link
 {
-    color: orange;
+    color: #333;
 }
 
 /*a.linklocal:link
@@ -68,19 +69,19 @@ a:link
 /* visited link */
 a:visited
 {
-    color: orange;
+    color: #333;
 }
 
 /* mouse over link */
 a:hover
 {
-    color: red;
+    color: #333;
 }
 
 /* selected link */
 a:active
 {
-    color: yellow;
+    color: #333;
 } 
 
 a 
@@ -225,7 +226,7 @@ p, h1, h2
 
 span
 {
-	color: #FF9900;
+	color: #333;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;

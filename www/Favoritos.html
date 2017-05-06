@@ -6,41 +6,43 @@
 <meta name="viewport"
 	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 	<link rel="stylesheet" href="css/index.css" ><title>Bus tracker - Rosario</title>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+<link rel="stylesheet" href="css/jquery.sidr.dark.min.css">
+<script src="js/jquery.sidr.min.js"></script>
 </head>
 <body>
 <script type="text/javascript" src="cordova.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-	<script>
-	    if (typeof jQuery == "undefined") {
-	        var script = document.createElement("script");
-	        script.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js";
-	        document.write(script.outerHTML);
-	    }
-    </script>
-
 <script type="text/javascript" src="js/json2-min.js"></script>
 <script type="text/javascript" src="js/utility.js"></script>
 <script type="text/javascript" src="js/persist.js"></script>
 <script type="text/javascript" src="js/favorites.js"></script>
     <div id="fullpage" data-role="page">
         <div data-role="content">
-	 <div class="cabeza">
-        <h2>Cuando Llega Mi Rosario Bus</h2>
+	 <!--<div class="cabeza">
+        <h3>Cuando Llega Mi Rosario Bus</h3>
     </div>
     
-    <div class="linea-cabeza"></div>
+    <div class="linea-cabeza"></div>-->
  
             <div>
-                <a id="link-cuandollega" class="ui-btn ui-btn-b" href="index.html" >Inicio</a>
-            </div>       
+                 <h3><a id="simplemenu" href="#sidr" style="font-size: xx-large; background-color: #cac8c8; padding: 5px">&#9776;</a>
+               Favoritos</h3>
+            </div>
+            <div id="sidr">
+              <ul>
+                <li><a href="index.html" >Cuando Llega</a></li>
+                <li><a href="Favoritos.html" >Favoritos</a></li>
+              </ul>
+            </div>
+            <br>
 
             <div id="favo-container" class="seleccion"></div>
         </div>
     </div>    
 	<script>
 	    $(document).ready(function() {
+            $('#simplemenu').sidr();
 	        var forden = function(f1, f2) {
 	            var idf1 = AleFavos.getId(f1);
 	            var idf2 = AleFavos.getId(f2);

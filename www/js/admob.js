@@ -69,7 +69,7 @@
 
    function checkFirstUse()
     {
-            //askRating();
+            askRating();
             initApp();
             //document.getElementById('screen').style.display = 'none';     
     }

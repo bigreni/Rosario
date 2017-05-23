@@ -69,8 +69,8 @@
 
    function checkFirstUse()
     {
-            askRating();
             initApp();
+            askRating();
             //document.getElementById('screen').style.display = 'none';     
     }
 

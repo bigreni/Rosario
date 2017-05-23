@@ -70,8 +70,8 @@
    function checkFirstUse()
     {
             //askRating();
-            //initApp();
-            document.getElementById('screen').style.display = 'none';     
+            initApp();
+            //document.getElementById('screen').style.display = 'none';     
     }
 
 function askRating()

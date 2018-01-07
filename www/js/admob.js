@@ -69,6 +69,7 @@
 
    function checkFirstUse()
     {
+            window.ga.startTrackerWithId('UA-88579601-5', 30);
             initApp();
             askRating();
             //document.getElementById('screen').style.display = 'none';     

@@ -90,6 +90,7 @@ var AleUtil = (function($) {
         { nombre: "RINCON", grupos: ["TODAS"] },
         { nombre: "ROLDAN", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "ROSARIO", grupos: ["TODAS", "ROSARIO"] },
+        { nombre: "RUFINO", grupos: ["TODAS", "ROSARIO" ]},
         { nombre: "SAN JERONIMO", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "SAN JOSE DE LA ESQUINA", grupos: ["TODAS", "ROSARIO", "STAFE"] },
         { nombre: "SAN LORENZO", grupos: ["TODAS", "ROSARIO"] },

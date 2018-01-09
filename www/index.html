@@ -302,6 +302,8 @@
 	        } else {
 	            $("#ddlocs").val("...");
 	        }
+            
+            window.ga.trackView('Home');
 	    });
 	</script>
     <script>
@@ -310,7 +312,6 @@
 	    $("#ddlins").select2();
 	    $("#ddcalles").select2();
 	    $("#ddcruces").select2();
-        window.ga.trackView('Home');
     </script>
   
 </body>

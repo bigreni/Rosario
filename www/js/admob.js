@@ -69,7 +69,12 @@
 
    function checkFirstUse()
     {
-            //window.ga.startTrackerWithId('UA-88579601-4');
+        setTimeout(function(){
+              window.ga.startTrackerWithId('UA-88579601-4');
+            //window.analytics.debugMode();  
+        }, 3000);
+        
+            window.ga.trackView('Home');
             initApp();
             askRating();
             //document.getElementById('screen').style.display = 'none';     

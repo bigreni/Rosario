@@ -37,6 +37,18 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-                    window.ga.startTrackerWithId('UA-88579601-4');
+        setTimeout(function(){
+
+      window.ga.startTrackerWithId('UA-88579601-4',
+                   function(response){
+                     alert(JSON.stringify(response));
+                   },
+                   function(error){
+                     alert(JSON.stringify(error));
+                  });
+
+      //window.analytics.debugMode();  
+
+ }, 3000);
     }
 };

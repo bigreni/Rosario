@@ -43,7 +43,9 @@
 	<script>
 	    $(document).ready(function() {
             $('#simplemenu').sidr();
+            window.ga.startTrackerWithId('UA-88579601-4', 1, function(msg) {
             window.ga.trackView('Favorites');
+            });
 	        var forden = function(f1, f2) {
 	            var idf1 = AleFavos.getId(f1);
 	            var idf2 = AleFavos.getId(f2);

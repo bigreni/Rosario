@@ -93,3 +93,9 @@ function askRating()
  
 AppRate.promptForRating(false);
 }   
+
+function loadFaves()
+{
+    window.ga.trackView('Favorites');
+    window.location = "Favoritos.html";
+}

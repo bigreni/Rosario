@@ -42,6 +42,5 @@ var app = {
             //window.analytics.debugMode();  
         }, 3000);
         
-        window.ga.trackView('Home');
     }
 };

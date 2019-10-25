@@ -2,7 +2,7 @@
         if ((/(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent))) {
             document.addEventListener('deviceready', checkFirstUse, false);
         } else {
-            checkFirstUse();
+            notFirstUse();
         }
     }
 
@@ -51,7 +51,9 @@
         document.addEventListener('onAdFailLoad', function (data) {
             document.getElementById('screen').style.display = 'none';     
         });
-        document.addEventListener('onAdLoaded', function (data) { });
+        document.addEventListener('onAdLoaded', function (data) {
+            AdMob.showInterstitial();
+        });
         document.addEventListener('onAdPresent', function (data) { });
         document.addEventListener('onAdLeaveApp', function (data) { });
         document.addEventListener('onAdDismiss', function (data) {
@@ -63,19 +65,33 @@
        AdMob.createBanner({adId:admobid.banner});
     }
 
-	function loadInterstitial() {
-        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: false, autoShow: true });
+    function loadInterstitial() {
+        if ((/(android|windows phone)/i.test(navigator.userAgent))) {
+            //AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: false, autoShow: false });
+            document.getElementById("screen").style.display = 'none';     
+        } else if ((/(ipad|iphone|ipod)/i.test(navigator.userAgent))) {
+            AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: false, autoShow: true });
+            //document.getElementById("screen").style.display = 'none';     
+        } else
+        {
+            document.getElementById("screen").style.display = 'none';     
+        }
     }
 
    function checkFirstUse()
     {
-        window.ga.startTrackerWithId('UA-88579601-4', 1, function(msg) {
-            window.ga.trackView('Home');
-        });
+        //window.ga.startTrackerWithId('UA-88579601-4', 1, function(msg) {
+        //    window.ga.trackView('Home');
+        //});
 
             initApp();
             askRating();
             //document.getElementById('screen').style.display = 'none';     
+    }
+
+   function notFirstUse()
+    {
+            document.getElementById('screen').style.display = 'none';     
     }
 
 function askRating()
@@ -96,6 +112,6 @@ AppRate.promptForRating(false);
 
 function loadFaves()
 {
-    window.ga.trackView('Favorites');
+    //window.ga.trackView('Favorites');
     window.location = "Favoritos.html";
 }

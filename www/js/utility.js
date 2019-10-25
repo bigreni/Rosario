@@ -1,7 +1,7 @@
-var AleUtil = (function($) {
+var AleUtil = (function ($) {
     var obj = {};
 
-    obj.addSelectOption = function(idSelector, valor, texto) {
+    obj.addSelectOption = function (idSelector, valor, texto) {
         if (valor === undefined)
             valor = "";
         if (texto === undefined)
@@ -12,32 +12,28 @@ var AleUtil = (function($) {
                 .text(texto));
     };
 
-    obj.cargarSelectConAjax = function(params) {
-        var opts = {
-            data  : params.data,
-            method: params.method,
-            url   : params.url,
-            cache : false
-        };
-
-        var donef = function(datos) {
-            var arr = $.parseJSON(datos);
-            if (arr.length > 0)
-                obj.addSelectOption(params.selector, "...", "...");
-            for (var i = 0; i < arr.length; i++) {
-                obj.addSelectOption(
-	                params.selector,
-	                (params.valName === ".") ? arr[i] : arr[i][params.valName],
-	                (params.txtName === ".") ? arr[i] : arr[i][params.txtName]
-	            );
-            }
-        };
-
-        $.ajax(opts)
-            .done(donef)
-            .error(params.errorf || function() { });
+    obj.cargarSelectConAjax = function (params) {
+        $.ajax({
+            type: "POST",
+            data: params.data,
+            url: params.url,
+            success: function (datos) {
+                var arr = $.parseJSON(datos);
+                if (arr.length > 0)
+                    obj.addSelectOption(params.selector, "...", "...");
+                for (var i = 0; i < arr.length; i++) {
+                    obj.addSelectOption(
+	                    params.selector,
+	                    (params.valName === ".") ? arr[i] : arr[i][params.valName],
+	                    (params.txtName === ".") ? arr[i] : arr[i][params.txtName]
+	                );
+                }
+            },
+            error: function () { },
+            cache: false
+        });
     }
-    
+
     obj.localidades = [
         { nombre: "ALVEAR", grupos: ["TODAS"] },
         { nombre: "ANDINO", grupos: ["TODAS", "ROSARIO"] },
@@ -90,7 +86,7 @@ var AleUtil = (function($) {
         { nombre: "RINCON", grupos: ["TODAS"] },
         { nombre: "ROLDAN", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "ROSARIO", grupos: ["TODAS", "ROSARIO"] },
-        { nombre: "RUFINO", grupos: ["TODAS", "ROSARIO" ]},
+        { nombre: "RUFINO", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "SAN JERONIMO", grupos: ["TODAS", "ROSARIO"] },
         { nombre: "SAN JOSE DE LA ESQUINA", grupos: ["TODAS", "ROSARIO", "STAFE"] },
         { nombre: "SAN LORENZO", grupos: ["TODAS", "ROSARIO"] },
@@ -109,7 +105,7 @@ var AleUtil = (function($) {
         { nombre: "VILLADA", grupos: ["TODAS", "ROSARIO", "STAFE"] },
         { nombre: "ZAVALLA", grupos: ["TODAS", "ROSARIO"] }
     ];
-    
+
     return obj;
 
 } (jQuery));

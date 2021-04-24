@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/index.css"><title>Bus tracker - Rosario</title>
+<!-- Include the jQuery library -->
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<link href="css/select2.min.css" rel="stylesheet" />
+<!--<script src="js/index.js"></script>-->
+<script src="js/select2.min.js"></script>
+
+
+    <style>
+            /* Hide all the app pages until jQuery Mobile inits to
+               avoid the Flash of Unstyled Content */
+            .splashscreen {
+                width: 100%;
+                height: 100%;
+                border: 0;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index:1001;
+                background:  url(https://s3.us-east-2.amazonaws.com/bigreni.com/img/status.gif) no-repeat center center; 
+                text-shadow: none;
+                color: black;
+            }
+        </style>
+</head>
+<body>
+<script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript">
+        var cachebuster = Math.round(new Date().getTime() / 1000);
+        document.write('<script type="text/javascript" src="https://s3.us-east-2.amazonaws.com/bigreni.com/js/rosario/main.js?cb=' +cachebuster+'"></scr' + 'ipt>');
+        //document.write('<script type="text/javascript" src="js/main.js?cb=' +cachebuster+'"></scr' + 'ipt>');
+    </script>	
+<script type="text/javascript" src="js/json2-min.js"></script>
+<script type="text/javascript" src="js/utility.js"></script>
+<script type="text/javascript" src="js/persist.js"></script>
+<script type="text/javascript" src="js/favorites.js"></script>
+
+    <div id="screen" class="splashscreen" style="display: none"></div>
+        <script>
+            // Show the splash screen with a loading message
+            // Handler to hide the message when the loading stops
+            window.onload = function () {
+                onLoad();
+                //document.getElementById("screen").style.display = 'none';
+            };
+            //document.getElementById("screen").innerHTML = 'Cargando...';
+            document.getElementById("screen").style.display = 'block';
+        </script> 
+    <div id="fullpage" data-role="page">
+        <div data-role="content">
+                 <h3>Cuando Llega Bus</h3>
+            <br>
+            <div id="div-calc-prov" class="droplist" >
+                <span>Provincia o grupo:</span>
+                <select id="ddprovs" >
+                    <option value="TODAS">TODAS</option>
+                    <option value="BSAS">BUENOS AIRES</option>
+                    <option value="ROSARIO">ROSARIO Y ALREDEDORES</option>
+                    <option value="STAFE">SANTA FE</option>
+                </select>
+            </div>
+    
+            <div id="div-calc-locs" class="droplist" >
+                <span>Localidad</span>
+                <select id="ddlocs" >
+                    <option value="...">...</option>
+                </select>
+            </div>
+    
+            <div id="div-calc-lineas" class="droplist" >
+                <span>Línea</span>
+                <select id="ddlins"></select>
+            </div>
+    
+            <div id="div-calc-calles" class="droplist" >
+                <span>Calle</span>
+                <select id="ddcalles"></select>
+            </div>
+    
+            <div id="div-calc-cruces" class="droplist" >
+                <span>Cruce</span>
+                <select id="ddcruces"></select>
+            </div>
+    
+            <div id="div-calc-result">
+            </div>
+        </div>
+    </div>
+	<script>
+	    (function() {
+	        var methods = ["assert", "cd", "clear", "count", "countReset",
+	        "debug", "dir", "dirxml", "error", "exception", "group",
+	        "groupCollapsed", "groupEnd", "info", "log", "markTimeline",
+	        "profile", "profileEnd", "select", "table", "time", "timeEnd",
+	        "timeStamp", "timeline", "timelineEnd", "trace", "warn"];
+	        var length = methods.length;
+	        var console = (window.console = window.console || {});
+	        var method;
+	        var nop = function() { };
+	        while (length--) {
+	            method = methods[length];
+	            if (!console[method])
+	                console[method] = nop;
+	        }
+	    })();
+
+	    $(document).ready(function() {
+	        var store = new Persist.Store("CuandoLlegaBus")
+
+	        // variables
+	        var valorProvs = "",
+	            valorLocal = "",
+	            valorLinea = "",
+	            valorCalle = "",
+	            valorCruce = "";
+
+	        var dameFavoActual = function() {
+	            return AleFavos.create(
+	                "",
+	                valorLocal,
+	                valorLinea,
+	                valorCalle,
+	                valorCruce
+	            );
+	        };
+
+	        var favoritar = function() {
+	            AleFavos.add(dameFavoActual());
+	            $(".favobtn").fadeOut(function() {
+	                $(".favolnk").fadeIn();
+	            });
+	        };
+
+	        var objCalculo = {
+	            run: function(postParams) {
+	                if (typeof this.xhr !== "undefined") {
+	                    try { this.xhr.abort(); }
+	                    catch (err) { }
+	                }
+	                this.xhr = $.post(
+                        "http://cuandollegabus.com/Calculo.aspx",
+                        postParams,
+                        function(data) {
+                            $("#div-calc-result").empty();
+                            $("#div-calc-result").append(data);
+                            var favoActual = dameFavoActual();
+                            if (AleFavos.exists(favoActual)) {
+                                $(".favolnk").show();
+                            } else {
+                                $(".favobtn").show();
+                            }
+                        },
+                        "html"
+                    );
+	            }
+	        };
+
+	        var calcular = function() {
+	            objCalculo.run({
+	                local: valorLocal,
+	                linea: valorLinea,
+	                calle: valorCalle,
+	                cruce: valorCruce
+	            });
+	        };
+
+	        var onCambioProvincias = function() {
+	            valorProvs = $("#ddprovs").val();
+	            store.set("provs", valorProvs);
+	            $("#ddlocs").empty();
+	            $("#ddlins").empty();
+	            $("#ddcalles").empty();
+	            $("#ddcruces").empty();
+	            $("#div-calc-result").empty();
+	            var i, j;
+	            AleUtil.addSelectOption("#ddlocs", "...");
+	            for (i = 0; i < AleUtil.localidades.length; i++) {
+	                var grupos = AleUtil.localidades[i].grupos;
+	                for (j = 0; j < grupos.length; j++) {
+	                    if (grupos[j] === valorProvs) {
+	                        AleUtil.addSelectOption("#ddlocs", AleUtil.localidades[i].nombre);
+	                    }
+	                }
+	            }
+
+	        };
+
+	        var onCambioLocalidades = function() {
+	            valorLocal = $("#ddlocs").val();
+	            store.set("local", valorLocal);
+	            $("#ddlins").empty();
+	            $("#ddcalles").empty();
+	            $("#ddcruces").empty();
+	            $("#div-calc-result").empty();
+	            if (valorLocal !== "...") {
+	                AleUtil.cargarSelectConAjax({
+	                    method: "POST",
+	                    url: "http://cuandollegabus.com/Lins.aspx",
+	                    data: { local: valorLocal },
+	                    selector: "#ddlins",
+	                    valName: ".",
+	                    txtName: "."
+	                });
+	            }
+
+	        };
+
+	        var onCambioLineas = function() {
+	            valorLinea = $("#ddlins").val();
+	            $("#ddcalles").empty();
+	            $("#ddcruces").empty();
+	            $("#div-calc-result").empty();
+	            if (valorLinea !== "...") {
+	                AleUtil.cargarSelectConAjax({
+	                    method: "POST",
+	                    url: "http://cuandollegabus.com/Calles.aspx",
+	                    data: {
+	                        local: valorLocal,
+	                        linea: valorLinea
+	                    },
+	                    selector: "#ddcalles",
+	                    valName: ".",
+	                    txtName: "."
+	                });
+	            }
+
+	        };
+
+	        var onCambioCalles = function() {
+	            valorCalle = $("#ddcalles").val();
+	            $("#ddcruces").empty();
+	            $("#div-calc-result").empty();
+	            if (valorCalle !== "...") {
+	                AleUtil.cargarSelectConAjax({
+	                    method: "POST",
+	                    url: "http://cuandollegabus.com/Cruces.aspx",
+	                    data: {
+	                        local: valorLocal,
+	                        linea: valorLinea,
+	                        calle: valorCalle
+	                    },
+	                    selector: "#ddcruces",
+	                    valName: ".",
+	                    txtName: "."
+	                });
+	            }
+
+	        };
+
+	        var onCambioCruces = function() {
+	            valorCruce = $("#ddcruces").val();
+	            $("#div-calc-result").empty();
+	            if (valorCruce !== "...") {
+	                calcular();
+	            }
+	        };
+
+	        // seteo eventos
+	        $("#ddprovs").change(onCambioProvincias);
+	        $("#ddlocs").change(onCambioLocalidades);
+	        $("#ddlins").change(onCambioLineas);
+	        $("#ddcalles").change(onCambioCalles);
+	        $("#ddcruces").change(onCambioCruces);
+
+	        $(document).on("click", ".recalc", function() {
+	            calcular();
+	        });
+
+	        $(document).on("click", ".favobtn", function() {
+	            favoritar();
+	        });
+
+	        // trabajo en inicio...
+	        if (store.get("provs") != null) {
+	            $("#ddprovs").val(store.get("provs"));
+	        }
+
+	        onCambioProvincias();
+
+	        if (store.get("local") != null) {
+	            $("#ddlocs").val(store.get("local"));
+	            onCambioLocalidades();
+	        } else {
+	            $("#ddlocs").val("...");
+	        }
+            
+	    });
+	</script>
+    <script>
+        $('#ddprovs').select2();
+        $('#ddlocs').select2();
+	    $("#ddlins").select2();
+	    $("#ddcalles").select2();
+	    $("#ddcruces").select2();
+    </script>
+  <div id="footer">
+  <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
+  <div class="row" id="bottomNav">
+    <div class="col-xs-6 text-center"><a href="index.html"><i class="glyphicon glyphicon-time"></i><br>Arrivals</a></div>
+    <div class="col-xs-6 text-center"><a href="javascript:loadFaves();"><i class="glyphicon glyphicon glyphicon-star-empty"></i><br>Favorites</a></div>
+  </div>
+  </div>
+</div>
+
+        <script type='text/javascript' src="js/bootstrap.min.js"></script>
+</body>
+</html>
